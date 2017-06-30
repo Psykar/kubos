@@ -17,15 +17,15 @@ class KubosLinker(object):
 
     def link_sys(self, link_cmd):
         for module in self.kb.modules(include_bin=False):
-            print '[module %s@%s]' % (module.yotta_name(), module.path)
+            print('[module %s@%s]' % (module.yotta_name(), module.path))
             utils.cmd('kubos', link_cmd, cwd=module.path)
 
         for target in self.kb.targets():
-            print '[target %s@%s]' % (target.yotta_name(), target.path)
+            print('[target %s@%s]' % (target.yotta_name(), target.path))
             utils.cmd('kubos', link_cmd + '-target', cwd=target.path)
 
     def link_app(self, app_dir, link_cmd):
-        print '[app %s]' % app_dir
+        print('[app %s]' % app_dir)
         for module in self.kb.modules(include_bin=False):
             utils.cmd('kubos', link_cmd, module.yotta_name(), cwd=app_dir)
 
