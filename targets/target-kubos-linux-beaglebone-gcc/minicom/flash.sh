@@ -192,14 +192,14 @@ main() {
   is_upgrade=0
   is_app=0
   is_run=0
-  
-  password=$(cat yotta_config.json | python -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["password"]')
-  dest_dir=$(cat yotta_config.json | python -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["destDir"]')
-  init_boot=$(cat yotta_config.json | python -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["initAtBoot"]')
-  run_level=$(cat yotta_config.json | python -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["runLevel"]')
-  init_flash=$(cat yotta_config.json | python -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["initAfterFlash"]')
-  app_name=$(cat ../../module.json | python -c 'import sys,json; x=json.load(sys.stdin); print x["name"]')
-  
+
+  password=$(cat yotta_config.json | python2 -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["password"]')
+  dest_dir=$(cat yotta_config.json | python2 -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["destDir"]')
+  init_boot=$(cat yotta_config.json | python2 -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["initAtBoot"]')
+  run_level=$(cat yotta_config.json | python2 -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["runLevel"]')
+  init_flash=$(cat yotta_config.json | python2 -c 'import sys,json; x=json.load(sys.stdin); print x["system"]["initAfterFlash"]')
+  app_name=$(cat ../../module.json | python2 -c 'import sys,json; x=json.load(sys.stdin); print x["name"]')
+
   init_script="S${run_level}${app_name}"
   
   unamestr=`uname`
