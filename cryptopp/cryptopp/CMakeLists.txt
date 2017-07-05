@@ -240,13 +240,13 @@ endif()
 
 if (BUILD_STATIC)
 	if(NOT CMAKE_VERSION VERSION_LESS 2.8.8)
-		add_library(cryptopp-static STATIC $<TARGET_OBJECTS:cryptopp-object>)
+		add_library(cryptopp STATIC $<TARGET_OBJECTS:cryptopp-object>)
 	else()
-		add_library(cryptopp-static STATIC ${cryptopp_SOURCES})
+		add_library(cryptopp STATIC ${cryptopp_SOURCES})
 	endif()
 
 	if (NOT CMAKE_VERSION VERSION_LESS 2.8.12)
-		target_include_directories(cryptopp-static PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include/cryptopp>)
+		target_include_directories(cryptopp PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> $<INSTALL_INTERFACE:include/cryptopp>)
 	endif()
 endif()
 
@@ -267,7 +267,7 @@ if(NOT MSVC)
 	set(COMPAT_VERSION ${cryptopp_VERSION_MAJOR}.${cryptopp_VERSION_MINOR})
 
 	if (BUILD_STATIC)
-		set_target_properties(cryptopp-static
+		set_target_properties(cryptopp
 				PROPERTIES
 				OUTPUT_NAME cryptopp)
 	endif()
@@ -282,7 +282,7 @@ endif()
 # Targets, compatible with Crypto++ GNUMakefile
 if (BUILD_STATIC)
 	add_custom_target(static)
-	add_dependencies(static cryptopp-static)
+	add_dependencies(static cryptopp)
 endif()
 if (BUILD_SHARED)
 	add_custom_target(dynamic)
@@ -295,7 +295,7 @@ endif()
 
 if(WIN32)
 	if (BUILD_STATIC)
-		target_link_libraries(cryptopp-static ws2_32)
+		target_link_libraries(cryptopp ws2_32)
 	endif()
 	if (BUILD_SHARED)
 		target_link_libraries(cryptopp-shared ws2_32)
@@ -305,7 +305,7 @@ endif()
 # This may need to be expanded to "Solaris"
 if ("${UNAME_SYSTEM}" STREQUAL "SunOS")
 	if (BUILD_STATIC)
-		target_link_libraries(cryptopp-static nsl socket)
+		target_link_libraries(cryptopp nsl socket)
 	endif()
 	if (BUILD_SHARED)
 		target_link_libraries(cryptopp-shared nsl socket)
@@ -314,7 +314,7 @@ endif()
 
 find_package(Threads)
 if (BUILD_STATIC)
-	target_link_libraries(cryptopp-static ${CMAKE_THREAD_LIBS_INIT})
+	target_link_libraries(cryptopp ${CMAKE_THREAD_LIBS_INIT})
 endif()
 if (BUILD_SHARED)
 	target_link_libraries(cryptopp-shared ${CMAKE_THREAD_LIBS_INIT})
@@ -327,7 +327,7 @@ endif()
 enable_testing()
 if(BUILD_TESTING)
 	add_executable(cryptest ${cryptopp_SOURCES_TEST})
-	target_link_libraries(cryptest cryptopp-static)
+	target_link_libraries(cryptest cryptopp)
 
 	# Setting "cryptest" binary name to "cryptest.exe"
 	if(NOT WIN32)
@@ -391,7 +391,7 @@ endif()
 
 # Development package
 if (BUILD_STATIC)
-	install(TARGETS cryptopp-static EXPORT ${export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+	install(TARGETS cryptopp EXPORT ${export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 install(FILES ${cryptopp_HEADERS} DESTINATION include/cryptopp)
 
