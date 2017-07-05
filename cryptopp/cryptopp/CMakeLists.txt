@@ -9,9 +9,9 @@ cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
 project(cryptopp)
 
 # Make RelWithDebInfo the default (it does e.g. add '-O2 -g -DNDEBUG' for GNU)
-#   If not in multi-configuration environments, no explicit build type or CXX 
+#   If not in multi-configuration environments, no explicit build type or CXX
 #   flags are set by the user and if we are the root CMakeLists.txt file.
-if (NOT CMAKE_CONFIGURATION_TYPES AND 
+if (NOT CMAKE_CONFIGURATION_TYPES AND
     NOT CMAKE_NO_BUILD_TYPE AND
     NOT CMAKE_BUILD_TYPE AND
     NOT CMAKE_CXX_FLAGS AND
@@ -132,7 +132,7 @@ if ((NOT CRYPTOPP_CROSS_COMPILE) AND (CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU|I
 	endif()
 endif()
 
-# Solaris specific 
+# Solaris specific
 if ((NOT CRYPTOPP_CROSS_COMPILE) AND "${UNAME_SYSTEM}" STREQUAL "SunOS")
 	# SunCC needs -native
 	if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "SunPro")
@@ -171,6 +171,10 @@ endif()
 if (NOT (WINDOWS OR WINDOWS_STORE OR WINDOWS_PHONE))
 	SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_FLAGS}")
 endif()
+
+# Just to make certain, as code depends on this.
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNDEBUG -frtti -fexceptions")
+add_compile_options(-frtti -fexceptions)
 
 #============================================================================
 # Sources & headers

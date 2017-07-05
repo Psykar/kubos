@@ -9,7 +9,8 @@
     "version":"0.1.0",
     "dependencies":{
         "csp":"kubostech/libcsp#~1.5.0",
-        "kubos-hal":"kubostech/kubos-hal"
+        "kubos-hal":"kubostech/kubos-hal",
+        "kubos-hal-iobc":"kubostech/kubos-hal-iobc"
     },
     "homepage":"https://<homepage>",
     "description":"Example app running on KubOS Linux."

@@ -66,7 +66,7 @@ typedef union __attribute__((__packed__)) {
 /** Length of the compile information. */
 #define LENGTH_COMPILE_INFORMATION 19
 
- 
+
 
 /**
  * Supervisor version and configuration bytes.
@@ -201,14 +201,14 @@ typedef union __attribute__((__packed__)) {
     /** Individual enable status fields */
     struct __attribute__((__packed__)) supervisor_enable_status_fields_t
     {
-                
+
         uint8_t
                 /** OBC Power. */
-                power_obc : 1, 
+                power_obc : 1,
                 /** Output power to the RTC. */
                 power_rtc : 1,
                 /** Supervisor mode. */
-                is_in_supervisor_mode : 1, 
+                is_in_supervisor_mode : 1,
                 : 1, : 1,
                 /** RTC is busy. */
                 busy_rtc : 1,
@@ -241,7 +241,7 @@ typedef union __attribute__((__packed__))  {
         /** IOBC Uptime as measured by Supervisor Controller. */
         uint32_t iobc_uptime;
         /** IOBC Reset Count. */
-        uint32_t iobc_reset_count; 
+        uint32_t iobc_reset_count;
         /** ADC Data. */
         uint16_t adc_data[SUPERVISOR_NUMBER_OF_ADC_CHANNELS];
         /** ADC Update Flag. */
